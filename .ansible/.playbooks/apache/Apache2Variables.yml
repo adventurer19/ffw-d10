@@ -1,0 +1,10 @@
+# vars:
+check: "Variable File is included."
+app_user: "www-data"
+http_host: "drupal-10"
+http_conf: "drupal-10.com.conf"
+http_port: "80"
+disable_default: true
+error_log_dir: "error_log"
+custom_log_dir: "custom_log"
+

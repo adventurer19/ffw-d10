@@ -1,0 +1,140 @@
+---
+- hosts: nikolay
+  name: Start 
+  become: true
+  tasks:
+    - name: Include Php task list. 
+      ansible.builtin.include_tasks:
+        file: .playbooks/php/php-playbook.yml   
+
+    # # - name: Include Drupal task list.
+    #   ansible.builtin.include_tasks:
+    #     file: .playbooks/drupal/drupal-install-book.yml   
+
+    - name: Include Apache2 task list.
+      ansible.builtin.include_tasks:
+        file: .playbooks/apache/Apache2Playbook.yml
+
+    # - name: Include mysql task list.
+    #   ansible.builtin.include_tasks:
+    #     file: .playbooks/mysql/mysqlplay.yml
+
+    # - name: Copy file with owner and permissions
+    #   ansible.builtin.copy:
+    #     src: /var/www/drupal-10/web/sites/default/default.settings.php
+    #     dest: /var/www/drupal-10/web/sites/default/settings.php
+    #     owner: vagrant
+    #     group: vagrant
+    #     mode: '0666'
+    
+
+  handlers:
+      - name: reload Apache
+        ansible.builtin.service:
+          name: apache2
+          state: restarted
+  # handlers:
+      - name: Restart mysql
+        service:
+          name: mysql
+          state: restarted              
+# - include_playbook: web-setup-book.yml         
+    # - include_tasks:  web-setup-book.yml
+    # - include_tasks: drupal-install-book.yml
+
+    # - name: Include a play after another play
+      # ansible.builtin.include_tasks:
+      # file: drupal-install-book.yml
+
+    # - include: drupal-install-book.yml
+      # ansible.builtin.import_playbook: 
+     
+#     - name: Create Drupal 10 directory.l
+#       file:
+#         path: /var/www/drupal-10
+#         state: directory
+#         owner: vagrant
+#         group: vagrant
+#         mode: 0775
+#         recurse: yes
+#     - name : Install php packages
+#       ansible.builtin.apt:
+#         pkg:    
+#         - php8.1-mysql
+#         - php8.1-curl
+#         # - php8.1-json
+#         - php8.1-cgi
+#         - php8.1-xsl
+#         - php8.1-cgi
+#         - php8.1-gd
+#         - php8.1-mbstring
+#         - php8.1-zip
+#         - php8.1-xmlrpc
+#         - php8.1-soap
+#         - php8.1-intl
+#         - libapache2-mod-php
+#         - php-xdebug
+#         state: present
+#         update_cache: yes 
+# - hosts: nikolay
+#   tasks:
+#     - name: Check if drupal 10 directory exists.
+#       stat: 
+#         path: /var/www/drupal-10
+#       register: drupal_exist
+#     - name: Task name
+#       debug: 
+#         msg: "the file exists"
+#       when: drupal_exist.stat.isdir
+#     - name: Check if d folder is empty before proceeding
+#       find:
+#         paths: '/var/www/drupal-10'
+#       register: filesFound
+#     - fail:
+#         msg: 'The d folder is not empty.'
+#       when: filesFound.matched > 0
+#     - debug:
+#         msg: 'The d folder is empty. Proceeding.'    
+
+
+#     # when: contents1.stdout != ""
+#   # - name: Check contents for emptiness for content1 or content2
+#     # ansible.builtin.debug:
+#   #     msg: "Directory is empty"
+#   #   when: installed_D10.stdout.find('hi') != -1
+#   # - name: Composer install Drupal 10.
+#     # composer:
+#     #   command: create-project
+#     #   arguments: drupal/recommended-project:10.0.0 .
+#     #   working_dir: /var/www/drupal-10
+#     #   prefer_dist: yes
+#     # composer create-project drupal/recommended-project:10.0.0 "install-dir"
+
+#     #  - name: "Repo PHP 8.1"
+#       #  apt_repository:
+#         #  repo="ppa:ondrej/php"
+   
+#     # - name: "Updating the repo"
+#     #   apt: update_cache=yes
+
+#     # - name: Installation PHP 8.1
+#     #   apt: name=php8.1 state=present
+
+#     # - name: install lamp stack
+#     #   apt:
+#     #     pkg:
+#     #       - php8.1-mysql
+#     #       - php8.1-curl
+#     #       - php8.1-json
+#     #       - php8.1-cgi
+#     #       - php8.1-xsl
+#     #       - php8.1-cgi
+#     #       - php8.1-gd
+#     #       - php8.1-mbstring
+#     #       - php8.1-zip
+#     #       - php8.1-xmlrpc
+#     #       - php8.1-soap
+#     #       - php8.1-intl
+#     #       - libapache2-mod-php
+#     #     state: present
+#     #     update_cache: yes 

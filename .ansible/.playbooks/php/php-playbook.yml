@@ -1,0 +1,33 @@
+  - name: Installation install software-properties-common
+    apt: 
+      name: software-properties-common
+
+  - name: Installation PHP 8.1
+    apt: 
+      name: php8.1
+      state: present
+
+  - name: install lamp stack
+    apt:
+      pkg:
+        - php8.1-mysql
+        - php8.1-curl
+        - php-json
+        - php8.1-cgi
+        - php8.1-xsl
+        - php8.1-cgi
+        - php8.1-gd
+        - php8.1-mbstring
+        - php8.1-zip
+        - php8.1-xmlrpc
+        - php8.1-soap
+        - php8.1-intl
+        - libapache2-mod-php
+        - php-xdebug
+      state: present
+      update_cache: yes
+
+  - name: Install composer globally 
+    ansible.builtin.apt:
+        name: composer
+        state: present

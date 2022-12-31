@@ -1,0 +1,68 @@
+    - include_vars: Apache2Variables.yml
+    - debug: 
+        msg: "{{ check }}!"
+
+    - name: apache installed
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: true
+        state: latest
+
+    - name: Check for Apache2 error log directory.
+      stat:
+        path: /etc/apache2/{{ error_log_dir }}
+      register: error
+
+    - name: "Apache2 error log directory does not exists,creating it."
+      file:
+        path: /etc/apache2/{{ error_log_dir }}
+        state: directory
+        mode: 0755
+        group: vagrant
+        owner: vagrant
+      when: error.stat.exists == false
+
+    - name: Check for Apache2 custom log directory.
+      stat:
+        path: /etc/apache2/{{ custom_log_dir}}
+      register: custom
+
+    - name: "Apache2 custom log directory does not exists,creating it."
+      file:
+        path: /etc/apache2/{{ custom_log_dir}}
+        state: directory
+        mode: 0755
+        group: vagrant
+        owner: vagrant
+      when: custom.stat.exists == false
+
+    # - name: enabled mod_rewrite
+      # apache2_module: name=rewrite state=present
+    - name: set up Apache virtualhost for drupal
+      ansible.builtin.template:
+        src: ".playbooks/templates/apache2-vh.conf.j2"
+        dest: "/etc/apache2/sites-available/{{ http_conf }}"
+
+    - name: enable new site
+      ansible.builtin.command: "/usr/sbin/a2ensite {{ http_conf }}"
+      notify: reload Apache
+
+    - name: disable default Apache site
+      ansible.builtin.command: "/usr/sbin/a2dissite 000-default.conf"
+      when: disable_default
+      notify: reload Apache
+
+    - name: open firewall
+      community.general.ufw:
+        rule: allow
+        port: "{{ 80 }}"
+        proto: tcp
+
+    - name: enable mod_rewrite in apache.
+      shell: "a2enmod rewrite"
+      register: a2enmodrewrite
+      changed_when: "'already enabled' not in a2enmodrewrite.stdout"
+      notify: reload Apache    
+        
+
+
