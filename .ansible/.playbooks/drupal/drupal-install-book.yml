@@ -1,50 +1,50 @@
-  - name: check if directory exists.
-    ansible.builtin.stat:
-        path: '/var/www/drupal-10'
-    register: checkDir
+  # - name: check if directory exists.
+  #   ansible.builtin.stat:
+  #       path: '/var/www/drupal-10'
+  #   register: checkDir
     
-  - name: Create Drupal 10 directory.
-    file:
-        path: /var/www/drupal-10
-        state: directory
-        owner: vagrant
-        group: vagrant
-        mode: 0775
-        recurse: true
-    when: checkDir.stat.exists != true
+  # - name: Create Drupal 10 directory.
+  #   file:
+  #       path: /var/www/drupal-10
+  #       state: directory
+  #       owner: vagrant
+  #       group: vagrant
+  #       mode: 0775
+  #       recurse: true
+  #   when: checkDir.stat.exists != true
 
-  - name: List contents of directory
-    ansible.builtin.command: ls /var/www/drupal-10/
-    register: list 
+  # - name: List contents of directory
+  #   ansible.builtin.command: ls /var/www/drupal-10/
+  #   register: list 
 
-  - name: Composer install Drupal 10.
-    composer:
-      command: create-project
-      arguments: drupal/recommended-project:10.0.0 .
-      working_dir: /var/www/drupal-10
-      prefer_dist: true
-    when: list.stdout == ""
+  # - name: Composer install Drupal 10.
+  #   composer:
+  #     command: create-project
+  #     arguments: drupal/recommended-project:10.0.0 .
+  #     working_dir: /var/www/drupal-10
+  #     prefer_dist: true
+  #   when: list.stdout == ""
 
-  - name: Changing project directory permission
-    file:
-      dest: "/var/www/drupal-10"
-      owner: vagrant
-      group: vagrant   
-      recurse: true
-      mode: u=rwX,g=rX,o=rX
+  # - name: Changing project directory permission
+  #   file:
+  #     dest: "/var/www/drupal-10"
+  #     owner: vagrant
+  #     group: vagrant   
+  #     recurse: true
+  #     mode: u=rwX,g=rX,o=rX
 
-  - name: Check if files directory exists in drupal project.
-    ansible.builtin.stat:
-        path: '/var/www/drupal-10/web/sites/default/files'
-    register: filesExists
+  # - name: Check if files directory exists in drupal project.
+  #   ansible.builtin.stat:
+  #       path: '/var/www/drupal-10/web/sites/default/files'
+  #   register: filesExists
     
-  - name: Create files directory.
-    file:
-        path: /var/www/drupal-10/web/sites/default/files
-        state: directory
-        owner: "www-data"
-        group: "www-data"
-        mode: u=rwX,g=rX,o=rX
-        recurse: true
-    when: filesExists.stat.exists != true      
+  # - name: Create files directory.
+  #   file:
+  #       path: /var/www/drupal-10/web/sites/default/files
+  #       state: directory
+  #       owner: "www-data"
+  #       group: "www-data"
+  #       mode: u=rwX,g=rX,o=rX
+  #       recurse: true
+  #   when: filesExists.stat.exists != true      
       

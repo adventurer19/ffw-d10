@@ -7,17 +7,17 @@
       ansible.builtin.include_tasks:
         file: .playbooks/php/php-playbook.yml   
 
-    # # - name: Include Drupal task list.
-    #   ansible.builtin.include_tasks:
-    #     file: .playbooks/drupal/drupal-install-book.yml   
+    - name: Include Drupal task list.
+      ansible.builtin.include_tasks:
+        file: .playbooks/drupal/drupal-install-book.yml   
 
     - name: Include Apache2 task list.
       ansible.builtin.include_tasks:
         file: .playbooks/apache/Apache2Playbook.yml
 
-    # - name: Include mysql task list.
-    #   ansible.builtin.include_tasks:
-    #     file: .playbooks/mysql/mysqlplay.yml
+    - name: Include mysql task list.
+      ansible.builtin.include_tasks:
+        file: .playbooks/mysql/mysqlplay.yml
 
     # - name: Copy file with owner and permissions
     #   ansible.builtin.copy:
@@ -37,7 +37,15 @@
       - name: Restart mysql
         service:
           name: mysql
-          state: restarted              
+          state: restarted  
+
+
+
+
+
+
+
+
 # - include_playbook: web-setup-book.yml         
     # - include_tasks:  web-setup-book.yml
     # - include_tasks: drupal-install-book.yml

@@ -27,7 +27,8 @@ Vagrant.configure("2") do |config|
   #SYNC FOLDER / MOUNT CONFIGURATION
 
   #sync drupal into var/www directory so it can be used by Apache VH.
-  config.vm.synced_folder "./drupal-dir/", "/var/www/drupal-10", create: true
+  config.vm.synced_folder "./drupal-dir/", "/var/www/drupal-10", create: true,
+  owner: "vagrant", group: "vagrant"
 
   #sync ansible files inside the vm
   config.vm.synced_folder "./.ansible/", "/vagrant/.ansible", create: true

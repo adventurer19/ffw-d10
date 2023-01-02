@@ -1,8 +1,13 @@
-<VirtualHost *:{{ http_port }}>
+<VirtualHost *:80>
   ServerAdmin webmaster@localhost
-  ServerName {{ http_host }}
-  ServerAlias www.{{ http_host }}
-  ErrorLog {{ error_log_dir }}/error.log
-  CustomLog {{ custom_log_dir }}/access.log combined
-  DocumentRoot "/var/www/{{ http_host }}/web"
+  ServerName drupal-10
+  ServerAlias www.drupal-10
+  ErrorLog error_log/error.log
+  CustomLog custom_log/access.log combined
+  DocumentRoot "/var/www/drupal-10/web"
+   <Directory "/var/www/drupal-10/web">
+      AllowOverride All
+      Options -Indexes +FollowSymLinks
+      Require all granted
+   </Directory>
 </VirtualHost>
