@@ -1,27 +1,23 @@
 Vagrant.configure("2") do |config|
 
   #BASE CONFIGURATION
-
-  config.vm.box = "nikolay-ffw/ffw-drupal10"
+  config.vm.box = "nikolay-ffw/ffw-box"
   config.vm.box_version = "1.0"
-
   config.vm.define "ffw-drupal10"
 
   # NETWORKING CONFIGURATION
 
-  config.vm.network 'private_network', ip: '192.168.33.3'
+  # config.vm.network 'private_network', ip: '192.168.33.3'
 
-  config.vm.network "public_network"
+  # config.vm.network "public_network"
 
 
-  config.vm.network "forwarded_port", guest: 80, host: 8091
+  config.vm.network "forwarded_port", guest: 80, host: 8070
 
   # SSH CONFIGURATION
 
   config.ssh.insert_key = false
-
   config.ssh.private_key_path = "./.ssh/ffw-custom-key"
-
   config.ssh.forward_agent = true
 
 

@@ -3,20 +3,20 @@
 # earlier versions of Drupal are tracked in `community/PHP/`
 
 # Ignore configuration files that may contain sensitive information
-drupal-dir/web/sites/*/*settings*.php
-drupal-dir/web/sites/*/*services*.yml
+# drupal-dir/web/sites/*/*settings*.php
+# drupal-dir/web/sites/*/*services*.yml
 
-# Ignore paths that may contain user-generated content
-drupal-dir/web/sites/*/files
-drupal-dir/web/sites/*/public
-drupal-dir/web/sites/*/private
-drupal-dir/web/sites/*/files-public
-drupal-dir/web/sites/*/files-private
+# # Ignore paths that may contain user-generated content
+# drupal-dir/web/sites/*/files
+# drupal-dir/web/sites/*/public
+# drupal-dir/web/sites/*/private
+# drupal-dir/web/sites/*/files-public
+# drupal-dir/web/sites/*/files-private
 
-# Ignore paths that may contain temporary files
-drupal-dir/web/sites/*/translations
-drupal-dir/web/sites/*/tmp
-drupal-dir/web/sites/*/cache
+# # Ignore paths that may contain temporary files
+# drupal-dir/web/sites/*/translations
+# drupal-dir/web/sites/*/tmp
+# drupal-dir/web/sites/*/cache
 
 # Ignore testing related files
 drupal-dir/web/sites/simpletest

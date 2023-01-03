@@ -5,9 +5,4 @@
   ErrorLog error_log/error.log
   CustomLog custom_log/access.log combined
   DocumentRoot "/var/www/drupal-10/web"
-   <Directory "/var/www/drupal-10/web">
-      AllowOverride All
-      Options -Indexes +FollowSymLinks
-      Require all granted
-   </Directory>
 </VirtualHost>

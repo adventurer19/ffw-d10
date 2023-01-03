@@ -43,6 +43,11 @@
         src: ".playbooks/templates/apache2-vh.conf.j2"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
 
+    - name: set up Apache conf file
+      ansible.builtin.template:
+        src: ".playbooks/templates/apache2.conf.j2"
+        dest: "/etc/apache2/apache2.conf"
+
     - name: enable new site
       ansible.builtin.command: "/usr/sbin/a2ensite {{ http_conf }}"
       notify: reload Apache
