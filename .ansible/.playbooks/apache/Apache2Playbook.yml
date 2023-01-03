@@ -36,8 +36,6 @@
         owner: vagrant
       when: custom.stat.exists == false
 
-    # - name: enabled mod_rewrite
-      # apache2_module: name=rewrite state=present
     - name: set up Apache virtualhost for drupal
       ansible.builtin.template:
         src: ".playbooks/templates/apache2-vh.conf.j2"
