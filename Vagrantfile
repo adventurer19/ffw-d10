@@ -2,7 +2,8 @@ Vagrant.configure("2") do |config|
 
   #BASE CONFIGURATION
 
-  config.vm.box = "ffw-drupal10"
+  config.vm.box = "nikolay-ffw/ffw-drupal10"
+  config.vm.box_version = "1.0"
 
   config.vm.define "ffw-drupal10"
 
